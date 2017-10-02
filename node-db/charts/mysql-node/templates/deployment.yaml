@@ -1,0 +1,25 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {{ .Values.name }}
+  labels:
+    app: {{ .Values.name }}
+spec:
+  replicas: {{ .Values.replica }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.name }}
+        release: "first"
+    spec:
+      containers:
+        - name: {{ .Values.name }}
+          image: "{{ .Values.image }}:5.7"
+          imagePullPolicy: {{ .Values.pullPolicy }}
+          ports:
+            - containerPort: {{ .Values.internalPort }}
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: {{ .Values.password | quote}}
+            - name: MYSQL_DATABASE
+              value: {{ .Values.database | quote}}

@@ -1,0 +1,14 @@
+aiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.global.serviceName }}
+  labels:
+    app: {{ .Values.serviceName }}
+spec:
+  type: {{ .Values.type }}
+  ports:
+    - port: {{ .Values.internalPort }}
+      tatgetPort: {{ .Values.internalPort }}
+      protocol: TCP
+  selector:
+    app: {{ .Values.name }}
