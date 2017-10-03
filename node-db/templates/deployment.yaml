@@ -19,10 +19,10 @@ spec:
             - containerPort: {{ .Values.service.internalPort }}
           env:
             - name: MYSQL_HOST
-              value: {{ .Values.global.serviceName | quote}}
+              value: {{ index .Values "mysql-node" "serviceName" | quote}}
             - name: MYSQL_USER
-              value: {{ .Values.global.user | quote }}
+              value: {{ index .Values "mysql-node" "user" | quote }}
             - name: MYSQL_PASSWORD
-              value: {{ .Values.global.password | quote }}
+              value: {{ index .Values "mysql-node" "password" | quote }}
             - name: MYSQL_DATABASE
-              value: {{ .Values.global.database | quote }}
+              value: {{ index .Values "mysql-node" "database" | quote }}
